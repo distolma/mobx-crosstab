@@ -1,0 +1,55 @@
+{
+  "name": "mobx-crosstab",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "MobX state synchronize between browser tabs",
+  "repository": "https://github.com/distolma/mobx-crosstab.git",
+  "author": "Dmytro Mostovyi <djmakaron2009@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel example/index.html --open",
+    "lint": "eslint *.js",
+    "test": "yarn lint && size-limit"
+  },
+  "peerDependencies": {
+    "mobx": ">=4.0.0-beta.1 <6"
+  },
+  "devDependencies": {
+    "@logux/eslint-config": "^28.2.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-es5": "^1.3.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-import-helpers": "^0.1.4",
+    "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^2.3.0",
+    "jest": "^24.8.0",
+    "lint-staged": "^8.1.7",
+    "parcel-bundler": "^1.12.3",
+    "size-limit": "^1.3.2",
+    "typescript": "^3.4.5",
+    "mobx": "^5.9.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "size-limit": [{
+    "path": "index.js",
+    "limit": "141 B"
+  }],
+  "eslintConfig": {
+    "extends": "@logux/eslint-config/browser"
+  }
+}
