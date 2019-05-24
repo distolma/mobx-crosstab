@@ -29,10 +29,10 @@
     "husky": "^2.3.0",
     "jest": "^24.8.0",
     "lint-staged": "^8.1.7",
+    "mobx": "^5.9.4",
     "parcel-bundler": "^1.12.3",
     "size-limit": "^1.3.2",
-    "typescript": "^3.4.5",
-    "mobx": "^5.9.4"
+    "typescript": "^3.4.5"
   },
   "lint-staged": {
     "*.js": [
@@ -45,10 +45,12 @@
       "pre-commit": "lint-staged"
     }
   },
-  "size-limit": [{
-    "path": "index.js",
-    "limit": "141 B"
-  }],
+  "size-limit": [
+    {
+      "path": "index.js",
+      "limit": "249 B"
+    }
+  ],
   "eslintConfig": {
     "extends": "@logux/eslint-config/browser"
   }

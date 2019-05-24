@@ -2,7 +2,7 @@
 
 A tiny [MobX] module to synchronize state between browser tabs.
 
-The size is only 141 bytes. It uses [Size Limit] to control size.
+The size is only 249 bytes. It uses [Size Limit] to control size.
 
 [mobx]:https://github.com/mobxjs/mobx
 [size limit]: https://github.com/ai/size-limit
@@ -21,7 +21,7 @@ By default `crossTab` function accept your state and apply it to `observable` fu
 import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
-const store = crossTab('count')({ count: 0 });
+const store = crossTab('count', { count: 0 });
 ```
 
 If you need to use another type of observation (ex. `deep`, `box`) you can create `observable` separately and pass it to the `crossTab` function
@@ -31,7 +31,7 @@ import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 const store = observable.deep({ count: 0 });
-crossTab('count')(store);
+crossTab('count', store);
 ```
 
 Also, you can use `crossTab` functions with class properties
@@ -41,10 +41,18 @@ import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 class TodoStore {
-  todos = crossTab('count')([]);
+  todos = crossTab('todos', []);
 }
 ```
 
+```javascript
+import { observable } from 'mobx';
+import crossTab from 'mobx-crosstab';
+
+class TodoStore {
+  @crossTab('todos') @observable.deep todos = [];
+}
+```
 
 
 ```javascript
@@ -52,17 +60,16 @@ import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 class TodoStore {
-  @crossTab('count') @observable.deep todos = [];
+  @crossTab('todos') todos = [];
 }
 ```
-
 
 ```javascript
 import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 class TodoStore {
-  @crossTab('count') todos = [];
+  @crossTab todos = [];
 }
 ```
 
