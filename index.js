@@ -1,44 +1,40 @@
 var mobx = require('mobx')
 
-function createCrossTab () {
-  var key = [].shift.call(arguments)
-  var observableValue = mobx.observable.apply(null, arguments)
-
+function createCrossTab (key, observable) {
+  // let skip = true;
   mobx.autorun(function () {
-    localStorage.setItem(key, JSON.stringify(mobx.toJS(observableValue)))
+    localStorage.setItem(key, JSON.stringify(mobx.toJS(observable)))
   })
 
   function handleStoreEvent (event) {
     if (event.key === key) {
+      // if (!skip) {
       var newValue = JSON.parse(event.newValue)
 
-      mobx.set(observableValue, newValue)
+      mobx.set(observable, newValue)
+      // }
+      // else {
+      //   skip = false
+      // }
     }
   }
 
   window.addEventListener('storage', handleStoreEvent)
 
-  return observableValue
+  return observable
 }
 
 function namedCrossTabDecorator (name) {
-  return function (target, key) {
-    var val = target[key]
+  return function (target, key, descriptor) {
+    mobx.spy(function (event) {
+      if (event.type !== 'add') return
+      if (event.key !== key) return
+      if (!target.isPrototypeOf(event.object)) return
 
-    function getter () {
-      return val
-    }
-
-    function setter (next) {
-      val = createCrossTab(name, next)
-    }
-
-    Object.defineProperty(target, key, {
-      get: getter,
-      set: setter,
-      enumerable: true,
-      configurable: true
+      createCrossTab(name, event.newValue)
     })
+
+    return descriptor
   }
 }
 

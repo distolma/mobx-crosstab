@@ -50,17 +50,9 @@ import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 class TodoStore {
-  @crossTab('todos') @observable.deep todos = [];
-}
-```
-
-
-```javascript
-import { observable } from 'mobx';
-import crossTab from 'mobx-crosstab';
-
-class TodoStore {
-  @crossTab('todos') todos = [];
+  @crossTab('todos')
+  @observable
+  todos = [];
 }
 ```
 
@@ -69,7 +61,9 @@ import { observable } from 'mobx';
 import crossTab from 'mobx-crosstab';
 
 class TodoStore {
-  @crossTab todos = [];
+  @crossTab
+  @observable
+  todos = [];
 }
 ```
 
