@@ -1,26 +1,25 @@
-const cross = require('..');
-const {observable, autorun} = require('mobx');
+var { observable, autorun } = require('mobx')
+var crossTab = require('..')
 
-// const a = observable({ count: 0, box: 1 });
-// const a = observable.box(0)
-
-// const o = cross('count', { count: 0, box: 1 })
-
-class Store {
-  @cross
-  @observable
-  count = 0;
+function $ (selector) {
+  return document.querySelector(selector)
 }
 
-const store = new Store();
-
-console.log(store)
-// store.count.lol = 1
-
-autorun(function() {
-    console.log(store.count);
+$('#dec').addEventListener('click', function () {
+  store.count--
+})
+$('#inc').addEventListener('click', function () {
+  store.count++
 })
 
-document.getElementById('inc').addEventListener('click', function() {
-  store.count++
+class Store {
+  @crossTab
+  @observable
+  count = 0
+}
+
+var store = new Store()
+
+autorun(function () {
+  $('#count').innerText = store.count;
 })
