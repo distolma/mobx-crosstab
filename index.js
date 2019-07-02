@@ -3,6 +3,26 @@ var mobx = require('mobx')
 function createCrossTab (name, observable, target, key) {
   var isBoxed = mobx.isBoxedObservable(observable)
   var isPropObservable = mobx.isObservableProp(target || {}, key || '')
+  var firstrun = true
+
+  if (firstrun && localStorage[name]) {
+    setValue(localStorage[name])
+    firstrun = false
+  }
+
+  function setValue (value) {
+    try {
+      value = JSON.parse(value)
+
+      if (isBoxed) {
+        observable.set(value)
+      } else if (isPropObservable) {
+        target[key] = value
+      } else {
+        mobx.set(observable, value)
+      }
+    } catch (error) { }
+  }
 
   mobx.autorun(function () {
     var value = isPropObservable ? target[key] : observable
@@ -13,15 +33,7 @@ function createCrossTab (name, observable, target, key) {
 
   window.addEventListener('storage', function (event) {
     if (event.key === name && event.newValue) {
-      var newValue = JSON.parse(event.newValue)
-
-      if (isBoxed) {
-        observable.set(newValue)
-      } else if (isPropObservable) {
-        target[key] = newValue
-      } else {
-        mobx.set(observable, newValue)
-      }
+      setValue(event.newValue)
     }
   })
 

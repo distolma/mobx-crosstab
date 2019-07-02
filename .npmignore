@@ -6,6 +6,10 @@ yarn.lock
 
 *.test.js
 .travis.yml
+.babelrc
+.eslintignore
+jsconfig.json
+CHANGELOG.md
 
 node_modules/
 example/

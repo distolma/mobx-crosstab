@@ -9,7 +9,7 @@
   "scripts": {
     "start": "parcel example/index.html --open",
     "lint": "eslint *.js",
-    "test": "yarn lint && size-limit"
+    "test": "jest --coverage && yarn lint && size-limit"
   },
   "peerDependencies": {
     "mobx": ">=4.0.0-beta.1 <6"
@@ -52,7 +52,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "249 B"
+      "limit": "333 B"
     }
   ],
   "eslintConfig": {
