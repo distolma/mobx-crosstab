@@ -54,7 +54,7 @@ function namedCrossTabDecorator (name) {
   }
 }
 
-module.exports = function crossTab (arg1, arg2) {
+function crossTab (arg1, arg2) {
   // crossTab(state)
   if (arguments.length === 1 && typeof arg1 !== 'string') {
     return createCrossTab('default', arg1)
@@ -73,3 +73,5 @@ module.exports = function crossTab (arg1, arg2) {
   // @crossTab state
   return namedCrossTabDecorator(arg2).apply(null, arguments)
 }
+
+module.exports = { crossTab: crossTab }
