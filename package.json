@@ -1,6 +1,6 @@
 {
   "name": "mobx-crosstab",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "MobX state synchronize between browser tabs",
   "repository": "https://github.com/distolma/mobx-crosstab.git",
